@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ncn-ends Tesseract API</title>
+</head>
+<body>
+<h1>ncn-ends Tesseract API Demo</h1>
+<main>
+    <p>
+        This is a client side demo of how the API works, so there is
+        minimal work on the front end. For more info,
+        <a href="https://github.com/ncn-ends/ocr-node-api"
+        >check the repo.</a
+        >
+    </p>
+    <form
+            name="ocr_img_upload_form"
+            method="post"
+            enctype="multipart/form-data"
+    >
+        <input
+                required
+                id="api_key_input"
+                type="text"
+                name="api_key"
+                placeholder="api key"
+        /><br/>
+        <input id="picture_input" type="file" name="picture" required/><br/>
+        <input type="submit"/>
+    </form>
+</main>
+<div id="response_text"></div>
+</body>
+
+<script>
+    const form = document.forms.namedItem('ocr_img_upload_form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const response_text = document.getElementById('response_text');
+        response_text.innerHTML = 'Loading...';
+
+        // verify that picture field is not empty
+        for (const [key, value] of formData.entries()) {
+            if (key === 'picture' && value.size === 0) {
+                response_text.innerHTML = 'Error!';
+                return;
+            }
+        }
+
+        const api_key = formData.get('api_key');
+
+        let req = new XMLHttpRequest();
+        req.open('POST', '/api/ocr?api_key=' + api_key, true);
+        req.onload = function (reqEvent) {
+            if (reqEvent.target.status == 200) {
+                const {stdout, uuid, text} = JSON.parse(
+                    reqEvent.target.response
+                );
+
+                const displayFields = [
+                    ['stdout: ', stdout],
+                    ['id: ', uuid],
+                    ['text: ', text],
+                ].map(([key, value]) => `<p>${key}${value}</p>`)
+                    .join('');
+
+                response_text.innerHTML = displayFields;
+            } else {
+                response_text.innerHTML = 'Error!';
+            }
+        };
+
+        req.send(formData);
+    });
+</script>
+</html>
