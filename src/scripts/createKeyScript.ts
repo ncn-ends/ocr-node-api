@@ -1,5 +1,5 @@
 import * as process from 'process';
-import APIKeyController from "./controllers/APIKeyController";
+import APIKeyController from "@/controllers/APIKeyController";
 
 // get label argument from cl
 const args = process.argv;
