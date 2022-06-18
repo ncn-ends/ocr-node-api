@@ -6,7 +6,7 @@
   "scripts": {
     "run": "babel-node index.ts --extensions \".ts\"",
     "dev": "NODE_ENV=DEV nodemon --exec yarn run run -- index.ts",
-    "build": "babel src --out-dir dist --copy-files --extensions \".ts,tsx,html,css\" --source-maps inline",
+    "build": "babel index.ts --out-dir dist --copy-files --extensions \".ts,tsx,html,css\" --source-maps inline",
     "start": "NODE_ENV=PROD node dist/index.js",
     "tsc": "tsc --noEmit",
     "ngrok": "cd ~/Documents && ./ngrok http 3000",
