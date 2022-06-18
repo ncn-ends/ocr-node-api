@@ -2,7 +2,7 @@
 app/out/
 app/node_modules/
 .idea/**
-README.md
+README_old.md
 apikeys.json
 build/**
 

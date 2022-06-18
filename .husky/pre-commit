@@ -1,7 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd app
-yarn tsc
-yarn test:e2e
-yarn test:jest
+# yarn test:e2e
+# yarn test:jest
