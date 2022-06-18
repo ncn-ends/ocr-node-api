@@ -5,22 +5,23 @@
   "license": "MIT",
   "scripts": {
     "run": "babel-node index.ts --extensions \".ts\"",
-    "start": "NODE_ENV=PROD npm run run",
-    "tsc": "tsc --noEmit",
     "dev": "NODE_ENV=DEV nodemon --exec yarn run run -- index.ts",
-    "ngrok": "cd ~/Documents && ./ngrok http 8080",
+    "build": "tsc --noEmit false --sourceMap false",
+    "start": "NODE_ENV=PROD node build/index.js",
+    "tsc": "tsc --noEmit",
+    "ngrok": "cd ~/Documents && ./ngrok http 3000",
     "debug": "yarn run dev --inspect-brk",
     "createApiKey": "babel-node src/createKeyScript.ts --extensions \".ts\"",
     "prepare": "husky install",
     "pm2:start": "pm2 start yarn --watch --interpreter bash --name app -- start",
     "test:cypress": "cypress run",
-    "test:e2e": "start-server-and-test test:server http://localhost:8080 test:cypress",
+    "test:e2e": "start-server-and-test test:server http://localhost:3000 test:cypress",
     "test:jest": "jest",
     "test:all": "yarn test:e2e && yarn test:jest",
     "test:server": "NODE_ENV=TEST babel-node index.ts --extensions \".ts\"",
     "ssl-gen": "./src/ssl-gen.sh"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",

@@ -1,9 +1,8 @@
 import * as fs from 'fs';
 
-const config = require( '../config' );
+import config from './config';
 import RequestMediator from './RequestMediator';
 import * as path from 'path';
-import * as https from 'https';
 import * as http from 'http';
 import APIKeyController from './controllers/APIKeyController';
 import { RoutesFileParam, RouteFileReturnType } from './RequestMediator';
@@ -61,7 +60,7 @@ export default class Server {
     static start( port: number ): void {
         // establish endpoints and store in memory to prevent disc reads for each request
         this._establishEndpoints();
-        console.log( 'Active Endpoints: \n', this._routes );
+        console.log( 'Active Endpoints: \n', this._routes.map(route => route.endpoint) ); // TODO: make this simpler
 
         // create necessary read/write directories
         ['/../out', '/../out/imgPreScan', '/../out/scannedText'].forEach(
@@ -79,31 +78,11 @@ export default class Server {
             throw new Error( 'No valid NODE_ENV var set. Must be: TEST, PROD, or DEV' )
         }
         
-        // start server
-        let server;
-        let protocol = "https";
-        // if (process.env.NODE_ENV === "PROD") {
-        //     protocol = 'https';
-        //     server = https.createServer( ( req, res ) => {
-        //         RequestMediator.serveRoutes( { req, res, routes: this._routes } );
-        //     } );
-        // }
-        // else {
-        //     protocol = 'http';
-        //     server = http.createServer( ( req, res ) => {
-        //         RequestMediator.serveRoutes( { req, res, routes: this._routes } );
-        //     } );
-        // }
-        const options = {
-            key: fs.readFileSync('key.pem'),
-            cert: fs.readFileSync('cert.pem')
-          };
-          
-        https.createServer(options, (req, res) => {
+        http.createServer((req, res) => {
             RequestMediator.serveRoutes({req, res, routes: this._routes});
         }).listen(port);
 
 
-        console.log(`Listening to ${protocol} requests on port ${port}...`);
+        console.log(`Listening to requests on port ${port}...`);
     }
 };

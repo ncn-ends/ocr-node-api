@@ -4,8 +4,7 @@ app/node_modules/
 .idea/**
 README.md
 apikeys.json
-cert.pem
-key.pem
+build/**
 
 # Logs
 logs

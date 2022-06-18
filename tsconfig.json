@@ -1,21 +1,25 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "target": "es2015",
     "strict": true,
     "downlevelIteration": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noUnusedParameters": false,
     "lib": [
       "es2019"
     ],
-    "noEmit": true
+    "noEmit": true,
+    "sourceMap": true,
+    "outDir": "build/",
+    "module": "commonjs",
+    "isolatedModules": false
   },
   "exclude": [
     "node_modules",
-    "src/routes/*"
   ],
   "include": [
-    "src/**/*"
+    "src"
 , "index.ts"  ]
 }
