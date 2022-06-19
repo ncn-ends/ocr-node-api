@@ -25,7 +25,7 @@ export default class Tesseract {
 
             // tesseract will always give a warning
             // this is for actual errors
-            if ( stderr && !stderr.includes( 'Warning' ) ) {
+            if ( stderr && !stderr.includes( 'Warning' ) && !stderr.includes( 'Estimating resolution' )) {
                 resBody = { uuid, error: stderr };
                 console.log( stderr );
             } else {

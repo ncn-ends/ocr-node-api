@@ -11,7 +11,7 @@ describe('Form submissions', () => {
 
     it('Working form submission', () => {
         // fill out form and submit
-        cy.get("#api_key_input").type('d08a32458863c6a99594ee09e910f1bc');
+        cy.get("#api_key_input").type('12321');
         cy.get("[type='file'").attachFile('sampletext1.png');
         cy.get("[name='ocr_img_upload_form'").submit();
 
@@ -52,7 +52,7 @@ describe('Form submissions', () => {
 
     it('Form submission without image', () => {
         // fill out form and submit but without the attached image
-        cy.get("#api_key_input").type('d08a32458863c6a99594ee09e910f1bc');
+        cy.get("#api_key_input").type('12321');
         cy.get("[name='ocr_img_upload_form'").submit();
 
         // wait for response to load, then get a generic error

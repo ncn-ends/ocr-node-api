@@ -11,14 +11,14 @@ describe("requests", () => {
     });
 
     it("assert server online", async () => {
-        return axios.get("http://localhost:8080")
+        return axios.get("http://localhost:3000")
             .then(response => {
                 expect(response.status).toBe(200);
             });
     });
 
     it("assert /api/ocr endpoint rejects GET request with 405", async () => {
-        return axios.get("http://localhost:8080/api/ocr")
+        return axios.get("http://localhost:3000/api/ocr")
             .then(response => {
                 fail('Expected status code 405. Got: ', response.status);
             })
@@ -29,7 +29,7 @@ describe("requests", () => {
 
 
     it("assert /api/ocr endpoint rejects invalid endpoint with 404.", async () => {
-        return axios.post("http://localhost:8080/api/whatever")
+        return axios.post("http://localhost:3000/api/whatever")
             .then(response => {
                 fail('Expected status code 404. Got: ', response.status);
             })
@@ -40,7 +40,7 @@ describe("requests", () => {
 
 
     it("assert /api/ocr endpoint rejects requests without API key with 401", async () => {
-        return axios.post("http://localhost:8080/api/ocr")
+        return axios.post("http://localhost:3000/api/ocr")
             .then(response => {
                 fail('Expected status code 401. Got: ', response.status);
             })
@@ -51,7 +51,7 @@ describe("requests", () => {
 
 
     it("assert /api/ocr endpoint rejects requests with invalid API key with 401", async () => {
-        return axios.post("http://localhost:8080/api/ocr?api_key=123")
+        return axios.post("http://localhost:3000/api/ocr?api_key=123")
             .then(response => {
                 fail('Expected status code 401. Got: ', response.status);
             })
@@ -62,7 +62,7 @@ describe("requests", () => {
 
     it("assert /api/ocr endpoint rejects requests without correct media type with 415", async () => {
         // api key 12321 is opened specifically for testing only
-        return axios.post("http://localhost:8080/api/ocr?api_key=12321")
+        return axios.post("http://localhost:3000/api/ocr?api_key=12321")
             .then(response => {
                 fail('Expected status code 415. Got: ', response.status);
             })
