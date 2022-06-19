@@ -4,8 +4,11 @@ export default class IPController {
     private static _loggedIPs: { ip: string; accesses: string[] }[] = [];
 
     static logIPAndVerify = ( { req }: { req: IncomingMessage } ): { pass: boolean, message?: string } => {
-        let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        if ( Array.isArray( ip ) ) ip = ip[0];
+        const parseIp = (req) =>
+            req.headers['x-forwarded-for']?.split(',').shift()
+            || req.socket?.remoteAddress;
+
+        const ip = parseIp(req);
 
         if ( !ip ) return { pass: false, message: 'No IP found.' };
 
