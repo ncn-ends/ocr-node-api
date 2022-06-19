@@ -10,8 +10,11 @@ export default class FileController {
         responses: Responses;
     } ) {
         const outputDir = path.join( __dirname, '../../out/imgPreScan/' );
+        let pictureExists = false;
         if ( files ) {
             for ( let file of files ) {
+                if (!file.picture) continue;
+                pictureExists = true;
                 const stream = fs.createWriteStream( outputDir + file.filename );
                 stream.write( file.picture, 'binary' );
                 stream.close();
@@ -20,6 +23,8 @@ export default class FileController {
                 Tesseract.process( { responses, filename: file.filename } );
             }
         }
+        // TODO: properly handle this
+        if (!pictureExists) throw new Error("Expected 'picture' in form body but didn't appear.");
     }
 
     static cleanUpFiles( { textFileName, imgFileName }: {

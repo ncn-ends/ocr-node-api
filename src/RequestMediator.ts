@@ -125,20 +125,21 @@ export default class RequestMediator {
 
         // each endpoint has its own file that determines what to do with the response
         // some endpoints may not return anything from the function directly
-        const resBody: RouteFileReturnType | undefined =
-            endpoint.executeFileExport( {
-                isMethod,
-                hasParam,
-                responses,
-                checkHeader,
-                req,
-                Parser,
-                checkQueryParam
-            } );
 
-        if ( !resBody ) {
-            return;
-        }
+            const resBody: RouteFileReturnType | undefined =
+                endpoint.executeFileExport( {
+                    isMethod,
+                    hasParam,
+                    responses,
+                    checkHeader,
+                    req,
+                    Parser,
+                    checkQueryParam
+                } );
+
+            if ( !resBody ) {
+                return;
+            }
     }
 
     // generic status code 400 response on any type of error

@@ -102,7 +102,6 @@ export default class Parser {
                     result.files.push( file );
                 }
             }
-
             // @ts-ignore
             FileController.write( { files: result.files, responses } );
         } );

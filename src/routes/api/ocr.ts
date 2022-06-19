@@ -1,6 +1,6 @@
 import APIKeyController from "../../controllers/APIKeyController";
 
-const ocrApiEndpoint = ( { isMethod, hasParam, responses, req, Parser, checkHeader, checkQueryParam } ) => {
+const ocrApiEndpoint = ( { isMethod, hasParam, responses, req, res, Parser, checkHeader, checkQueryParam } ) => {
     if ( !isMethod( 'POST' ) )
         return responses.reject(405);
 
@@ -18,8 +18,11 @@ const ocrApiEndpoint = ( { isMethod, hasParam, responses, req, Parser, checkHead
             "Content Type Header missing. Should be 'multipart/form-data'"
         );
 
-
-    Parser.formBody( { req, responses } );
+    const err = Parser.formBody( { req, responses } );
+    if (err) {
+        console.log("entered err");
+        responses.reject(res, 500, err);
+    }
 };
 
 module.exports = ocrApiEndpoint;
