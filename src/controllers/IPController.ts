@@ -4,6 +4,8 @@ export default class IPController {
     private static _loggedIPs: { ip: string; accesses: string[] }[] = [];
 
     static logIPAndVerify = ( { req }: { req: IncomingMessage } ): { pass: boolean, message?: string } => {
+        console.log(req.headers['x-real-ip'])
+        console.log(req.headers['X-Real-IP'])
         const parseIp = (req) =>
             req.headers['x-forwarded-for']?.split(',').shift()
             || req.socket?.remoteAddress;
