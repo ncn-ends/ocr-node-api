@@ -17,8 +17,8 @@
     "pm2:start": "pm2 start yarn --watch --interpreter bash --name app -- start",
     "test:cypress": "cypress run",
     "test:e2e": "start-server-and-test test:server http://localhost:3000 test:cypress",
-    "test:jest": "jest",
-    "test:all": "yarn test:e2e && yarn test:jest",
+    "test:unit": "jest",
+    "test:all": "yarn test:e2e && yarn test:unit",
     "test:server": "NODE_ENV=TEST babel-node src/index.ts --extensions \".ts\"",
     "ssl-gen": "./src/scripts/ssl-gen.sh"
   },
