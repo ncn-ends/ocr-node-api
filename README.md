@@ -4,9 +4,10 @@
 
 A NodeJS web API wrapper for Tesseract OCR, built with no libraries, frameworks, or any other runtime dependencies. 
 
-### Demo
+### Links
 
-https://ocr.ncn.dev
+[Demo](https://ocr.ncn.dev)  
+[Project Blog](https://gist.github.com/ncn-ends/aa6db18707fd3b1d506bac14d41be2d9)
 
 ### Goals
 Original intention for this project was to explore a few different areas:
