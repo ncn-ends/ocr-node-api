@@ -22,6 +22,9 @@ To learn more about what I learned and the difficulties that were overcome durin
     - Folders are respected
         - e.g. `/src/routes/api/hello/world.ts` will point to `<domain>/api/hello/world`
 
+- The server requires Tesseract OCR CLI to be installed on a linux system
+    - If using Windows, need to may need to make slight modifications to the cli executable command.
+
 ### Development
 ```js
 yarn createApiKey -l "dev"
